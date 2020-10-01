@@ -16,15 +16,32 @@
 <div th:replace="~{navigation :: navi(Home)}" />
 
 <div class="container">
-    <h1>Welcome page</h1>
-    <h2>Index:</h2>
+    <h1>Добро пожаловать в наш магазин</h1>
+    <h2>Список товаров:</h2>
+    <h6>Тут должен быть список товаров</h6>
     <br>
-    <a sec:authorize="isAuthenticated()" href="/students/list">Show students list</a>
-    <br>
-    <a sec:authorize="hasAnyRole('ADMIN','MANAGER')" href="/students/add">Add new student</a>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>TITLE</th>
+            <th>DESC</th>
+            <th>COST</th>
+            <th>ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${productsList}">
+            <td th:text="${product.getId()}"/>
+            <td th:text="${product.getTitle()}"/>
+            <td th:text="${product.getDescription()}"/>
+            <td th:text="${product.getCost()}"/>
+            <td><a th:href="@{/}" class="btn btn-primary">Add to cart</a></td>
+        </tr>
+        </tbody>
+    </table>
+<br>
 </div>
 </body>
 </html>
