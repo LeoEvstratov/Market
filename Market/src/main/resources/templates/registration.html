@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register new User</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/js/main.js}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/resources/css/main.css}"/>
+</head>
+<html>
+<body>
+<div class="container">
+    <h2>Registration form</h2>
+    <br>
+    <form th:action="@{/registration}" th:object="${user}" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" th:field="*{username}" placeholder="User name"/>
+            <br>
+            <input type="text" class="form-control" th:field="*{password}" placeholder="password"/>
+            <br>
+            <input type="text" class="form-control" th:field="*{passwordConfirmation}"
+                   placeholder="password confirmation">
+            <br>
+            <input type="text" class="form-control" th:field="*{email}" placeholder="User's email">
+            <br>
+            <div th:each="role : ${allRoles}">
+                <input type="checkbox" th:value="${role.id}" th:field="*{authorities}" th:text="${role.name}"/>
+                <br>
+            </div>
+            <br>
+            <div class="submit">
+                <button name="addStudent" class="btn btn-primary" type="submit">Register</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
