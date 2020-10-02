@@ -20,4 +20,8 @@ public class ProductService {
     public void setProductRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
+
+    public List<Product> searchByName(String searchQuery) {
+        return productRepository.searchByName(searchQuery);
+    }
 }
