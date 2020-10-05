@@ -20,16 +20,16 @@ public class MainController {
     @RequestMapping("/")
     public String showHomePage(@RequestParam(name = "searchQuery", required = false) String searchQuery, Model model) {
         List<Product> productsList;
-        if (!searchQuery.isEmpty()){
+        if (searchQuery == null || searchQuery.isEmpty()) {
+            productsList = productService.getAllProductsList();
+        } else {
             productsList = productService.searchByName(searchQuery);
         }
-        else {
-            productsList = productService.getAllProductsList();
-        }
         model.addAttribute("productsList", productsList);
-        model.addAttribute("searchQuery",searchQuery);
+        model.addAttribute("searchQuery", searchQuery);
         return "index";
     }
+
 
     @Secured({"ROLE_ADMIN"})
     @GetMapping("/admin")

@@ -18,8 +18,6 @@
 <div class="container">
     <h1>Добро пожаловать в наш магазин</h1>
     <h2>Список товаров:</h2>
-    <h6>Тут должен быть список товаров</h6>
-    <br>
 
     <table class="table">
         <thead class="thead-dark">
@@ -35,13 +33,15 @@
         <tr th:each="product : ${productsList}">
             <td th:text="${product.getId()}"/>
             <td th:text="${product.getTitle()}"/>
-            <td th:text="${product.getDescription()}"/>
-            <td th:text="${product.getCost()}"/>
-            <td><a th:href="@{/}" class="btn btn-primary">Add to cart</a></td>
+            <td th:text="${product.getShortDescription()}"/>
+            <td th:text="${product.getPrice()}"/>
+            <td><a th:href="@{/}" class="btn btn-secondary">Add to cart</a></td>
+            <td><a th:href="@{'/modify/'+${product.getId()}}" class="btn btn-secondary">Modify</a></td>
         </tr>
         </tbody>
     </table>
 <br>
+    <a th:href="@{/addProduct}" class="btn btn-dark">Add a new product</a>
 </div>
 </body>
 </html>
