@@ -17,7 +17,7 @@ public class MainController {
     // https://getbootstrap.com/docs/4.1/getting-started/introduction/
     private ProductService productService;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String showHomePage(@RequestParam(name = "searchQuery", required = false) String searchQuery, Model model) {
         List<Product> productsList;
         if (searchQuery == null || searchQuery.isEmpty()) {
@@ -30,6 +30,10 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/ajax")
+    public String showMainPage(Model model) {
+        return "mainPage";
+    }
 
     @Secured({"ROLE_ADMIN"})
     @GetMapping("/admin")
