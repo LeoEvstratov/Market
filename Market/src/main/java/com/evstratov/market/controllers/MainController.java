@@ -17,8 +17,27 @@ public class MainController {
     // https://getbootstrap.com/docs/4.1/getting-started/introduction/
     private ProductService productService;
 
+//    @GetMapping("/")
+//    public String showHomePage(@RequestParam(name = "searchQuery", required = false) String searchQuery, Model model) {
+//        List<Product> productsList;
+//        if (searchQuery == null || searchQuery.isEmpty()) {
+//            productsList = productService.getAllProductsList();
+//        } else {
+//            productsList = productService.searchByName(searchQuery);
+//        }
+//        model.addAttribute("productsList", productsList);
+//        model.addAttribute("searchQuery", searchQuery);
+//        return "index";
+//    }
+
     @GetMapping("/")
-    public String showHomePage(@RequestParam(name = "searchQuery", required = false) String searchQuery, Model model) {
+    public String showMainPage(Model model) {
+        return "mainPage";
+    }
+
+    @Secured({"ROLE_ADMIN"})
+    @GetMapping("/admin")
+    public String showAdminPanel(@RequestParam(name = "searchQuery", required = false) String searchQuery, Model model) {
         List<Product> productsList;
         if (searchQuery == null || searchQuery.isEmpty()) {
             productsList = productService.getAllProductsList();
@@ -27,17 +46,6 @@ public class MainController {
         }
         model.addAttribute("productsList", productsList);
         model.addAttribute("searchQuery", searchQuery);
-        return "index";
-    }
-
-    @GetMapping("/ajax")
-    public String showMainPage(Model model) {
-        return "mainPage";
-    }
-
-    @Secured({"ROLE_ADMIN"})
-    @GetMapping("/admin")
-    public String showAdminPanel() {
         return "admin-panel";
     }
 

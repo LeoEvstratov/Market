@@ -13,7 +13,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
+//todo add validation
     @Column(name = "vendor_code")
     private String vendorCode;
 

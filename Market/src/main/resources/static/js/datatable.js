@@ -23,13 +23,13 @@ $(document).ready( function () {
         "initComplete": function(settings, json) {
             $('.add-item-btn').on('click', function(event) {
                 var btnLink = $(this).attr('link');
-                // console.log(btnLink);
+                console.log(btnLink);
                 $.ajax({
-                    url: "/geekmarket/api/cart_items",
-                    type: "POST",
-                    data: {
-                        "id": btnLink
-                    }
+                    url: "/market/api/addToCart/"+btnLink,
+                    type: "GET",
+                    // data: {
+                    //     "id": btnLink
+                    // }
                 }).done(function() {
                     alert("Товар добавлен в корзину");
                 });

@@ -42,6 +42,7 @@ public class ShoppingCartService {
             o.setOrder(order);
         }
         orderRepository.save(order);
+       shoppingCart.clear();
     }
 
     @Autowired
@@ -58,4 +59,6 @@ public class ShoppingCartService {
     public void setOrderItemRepository(OrderItemRepository orderItemRepository) {
         this.orderItemRepository = orderItemRepository;
     }
+
+
 }

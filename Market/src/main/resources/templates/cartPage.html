@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<div th:replace="~{navigation :: navi(Cart)}" />
+<div th:replace="~{navigation :: navi(Cart)}"/>
 
 <div class="container">
     <h1>Your cart</h1>
@@ -25,7 +25,8 @@
             <th>PRODUCT</th>
             <th>QUANTITY</th>
             <th>COST</th>
-            <th>ACTION</th>
+            <th>Add</th>
+            <th>Remove</th>
         </tr>
         </thead>
         <tbody>
@@ -33,11 +34,14 @@
             <td th:text="${cartItem.getProduct().getTitle()}"/>
             <td th:text="${cartItem.getQuantity()}"/>
             <td th:text="${cartItem.getSubtotalPrice()}"/>
-            <td><a th:href="@{'/removeFromCart/'+${cartItem.product.getId()}}" class="btn btn-secondary">Remove</a></td>
+            <td><a th:href="@{'/addToCart/'+${cartItem.product.getId()}}" class="btn btn-primary">+</a></td>
+            <td><a th:href="@{'/removeFromCart/'+${cartItem.product.getId()}}" class="btn btn-danger">-</a></td>
         </tr>
         </tbody>
     </table>
-<br>
+    <br>
+    <h3 th:text="'Order cost: '+${totalCost}"/>
+    <br>
     <a th:href="@{/makeOrder}" class="btn btn-dark">Make an order</a>
 </div>
 </body>

@@ -20,7 +20,7 @@ public class ShoppingCart {
         orderItems.add(new OrderItem(product));
     }
 
-    public void removeProduct(Product product) {//todo not removing orderitem when quantity is zero
+    public void removeProduct(Product product) {
         for (OrderItem orderItem : orderItems) {
             if (orderItem.getProduct().equals(product)) {
                 orderItem.decreaseQuantity();
@@ -31,9 +31,15 @@ public class ShoppingCart {
     }
 
     public double getTotalCost() {
+        totalCost = 0;
         for (OrderItem orderItem : orderItems) {
             totalCost += orderItem.getSubtotalPrice();
         }
         return totalCost;
+    }
+
+    public void clear() {
+        orderItems = new HashSet<>();
+        totalCost = 0;
     }
 }

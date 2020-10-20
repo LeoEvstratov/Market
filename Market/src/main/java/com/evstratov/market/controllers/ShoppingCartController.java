@@ -7,11 +7,14 @@ import com.evstratov.market.entities.User;
 import com.evstratov.market.services.ProductService;
 import com.evstratov.market.services.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
@@ -25,10 +28,12 @@ public class ShoppingCartController {
     public String showCart(Model model, HttpSession session) {
         ShoppingCart cart = shoppingCartService.getCart(session);
         model.addAttribute("cartItems", cart.getOrderItems());
+        model.addAttribute("totalCost", cart.getTotalCost());
         return "cartPage";
     }
 
-    @GetMapping("addToCart/{id}")
+
+        @GetMapping("addToCart/{id}")
     public String addToCart(@PathVariable(value = "id") Long id, HttpSession session) {
         Optional<Product> product = productService.getProductById(id);
 
@@ -36,8 +41,9 @@ public class ShoppingCartController {
             ShoppingCart cart = shoppingCartService.getCart(session);
             cart.addProduct(product.get());
         }
-        return "redirect:/";
+        return "redirect:/cart";
     }
+
 
     @GetMapping("removeFromCart/{id}")
     public String removeFromCart(@PathVariable("id") Long id, HttpSession session) {
@@ -49,7 +55,7 @@ public class ShoppingCartController {
 
     @GetMapping("makeOrder")
     public String makeOrder(@AuthenticationPrincipal User user, HttpSession session) {
-        if (user==null) return "login";
+        if (user == null) return "login";
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         shoppingCartService.makeOrder(cart, user);
         return "successOrder";

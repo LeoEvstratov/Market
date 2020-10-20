@@ -39,17 +39,13 @@ public class OrderItem {
     }
 
     public void increaseQuantity() {
-        quantity++;
+        ++quantity;
         subtotalPrice = product.getPrice() * quantity;
     }
 
     public void decreaseQuantity() {
-        quantity--;
+        --quantity;
         subtotalPrice = product.getPrice() * quantity;
-    }
-
-    public double getSubtotalPrice() {
-        return quantity;
     }
 
     @Override
