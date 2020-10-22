@@ -25,7 +25,7 @@ $(document).ready( function () {
                 var btnLink = $(this).attr('link');
                 console.log(btnLink);
                 $.ajax({
-                    url: "/market/api/addToCart/"+btnLink,
+                    url: "/market/api/addToCart/"+btnLink, //todo change to post
                     type: "GET",
                     // data: {
                     //     "id": btnLink

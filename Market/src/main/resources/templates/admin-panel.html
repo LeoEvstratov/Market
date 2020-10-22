@@ -16,31 +16,33 @@
 <div th:replace="~{navigation :: navi('Admin Dashboard')}"/>
 <div class="container">
     <h1>Admin Panel</h1>
-    Тут нужно перечислить всех пользователей с возможностью давать им роли
+    <!--    todo users roles edit-->
+    <!--todo orders with status change-->
+    <!--    todo warehouse with product total quantity-->
     <br>
     <div class="container">
-    <a th:href="@{/addProduct}" class="btn btn-dark mb-2">Add a new product</a>
-    <br>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th>ID</th>
-            <th>TITLE</th>
-            <th>DESC</th>
-            <th>COST</th>
-            <th>ACTION</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${productsList}">
-            <td th:text="${product.getId()}"/>
-            <td th:text="${product.getTitle()}"/>
-            <td th:text="${product.getShortDescription()}"/>
-            <td th:text="${product.getPrice()}"/>
-            <td><a th:href="@{'/modify/'+${product.getId()}}" class="btn btn-secondary">Modify</a></td>
-        </tr>
-        </tbody>
-    </table>
+        <a th:href="@{/addProduct}" class="btn btn-dark mb-2">Add a new product</a>
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>DESC</th>
+                <th>COST</th>
+                <th>ACTION</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${productsList}">
+                <td th:text="${product.getId()}"/>
+                <td th:text="${product.getTitle()}"/>
+                <td th:text="${product.getShortDescription()}"/>
+                <td th:text="${product.getPrice()}"/>
+                <td><a th:href="@{'/modify/'+${product.getId()}}" class="btn btn-secondary">Modify</a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

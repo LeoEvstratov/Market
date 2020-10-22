@@ -13,12 +13,14 @@
 </head>
 <body>
 
-<div th:replace="~{navigation :: navi(Home)}" />
+<div th:replace="~{navigation :: navi(Home)}"/>
 
 <div class="container">
     <h1>Добро пожаловать в наш магазин</h1>
     <h2>Список товаров:</h2>
-
+    <!--todo make html page with pagination, with ajax requests to add product to cart with pop up message 'added to cart' -->
+    <!--todo make cards with photos interface-->
+    <!--   todo favicon-->
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -40,7 +42,7 @@
         </tr>
         </tbody>
     </table>
-<br>
+    <br>
     <a th:href="@{/addProduct}" class="btn btn-dark">Add a new product</a>
 </div>
 </body>
