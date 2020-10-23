@@ -8,6 +8,7 @@ import java.util.Set;
 @Data
 public class ShoppingCart {
     private Set<OrderItem> orderItems = new HashSet<>();
+    private String address;
     private double totalCost;
 
     public void addProduct(Product product) {

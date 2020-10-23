@@ -33,8 +33,8 @@ public class ShoppingCartService {
         Order order = new Order();
         Optional<OrderStatus> status = statusRepository.findById(1);
         if (status.isPresent()) order.setStatus(status.get());
+        order.setAddress(shoppingCart.getAddress());
         order.setCustomer(user);
-        order.setOrderTime(new Date());
         orderRepository.save(order);
 
         order.setOrderItems(shoppingCart.getOrderItems());
@@ -42,7 +42,7 @@ public class ShoppingCartService {
             o.setOrder(order);
         }
         orderRepository.save(order);
-       shoppingCart.clear();
+        shoppingCart.clear();
     }
 
     @Autowired

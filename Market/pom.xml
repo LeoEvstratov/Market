@@ -124,7 +124,7 @@
 					<user>geek</user>
 					<password>geek</password>
 					<schemas>
-						<schema>geek_market</schema>
+						<schema>market_db</schema>
 					</schemas>
 				</configuration>
 			</plugin>
