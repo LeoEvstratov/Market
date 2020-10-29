@@ -41,7 +41,7 @@
     <br>
     <br>
     <form th:action="@{/makeOrder}" th:object="${cart}" method="post">
-        <input type="text" class="form-control" th:field="*{address}"  placeholder="Recipient's address" aria-label="Recipient's address">
+        <input type="text" class="form-control" th:field="*{address}"  placeholder="Enter your address" aria-label="Recipient's address">
         <input type="hidden" class="form-control" th:field="*{totalCost}">
 <!--        <input type="hidden" class="form-control" th:field="*{orderItems}">-->
         <br>

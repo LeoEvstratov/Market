@@ -14,6 +14,7 @@ public class MarketApplication {
         SpringApplication.run(MarketApplication.class, args);
     }
 //    some ideas to improve this project
+//    todo security on all layers!!!
 //todo manager profile (all orders with user addresses and phones and status change selector)
 //todo	user profile (my orders)
 //todo	search with multiple parameters

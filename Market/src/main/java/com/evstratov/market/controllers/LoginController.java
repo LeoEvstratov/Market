@@ -27,6 +27,7 @@ public class LoginController {
         User user = new User();
         model.addAttribute("user", user);
         List<Role> allRoles = userService.getAllRoles();
+        //todo cut out role selection, role has to be selected by admin
         model.addAttribute("allRoles", allRoles);
         return "registration";
     }

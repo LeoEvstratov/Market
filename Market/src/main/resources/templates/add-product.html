@@ -7,34 +7,39 @@
 
     <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/resources/js/main.js}"></script>
     <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
-    <link type="text/css" rel="stylesheet" th:href="@{/resources/css/main.css}"/>
 </head>
 <html>
 <body>
 <div class="container">
-    <h2>Create</h2>
+    <h2>Create/modify product</h2>
     <br>
     <form th:action="@{/addProduct}" th:object="${product}" method="post">
         <div class="form-group">
             <input type="hidden" th:field="*{id}">
             <input type="text" class="form-control" th:field="*{vendorCode}" placeholder="Vendor code"/>
+            <label th:if="${#fields.hasErrors('vendorCode')}" th:errors="*{vendorCode}" class="text-danger"/>
+
             <br>
             <input type="text" class="form-control" th:field="*{title}" placeholder="Title"/>
+            <label th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"/>
             <br>
             <input type="text" class="form-control" th:field="*{shortDescription}"
                    placeholder="Short Description">
+            <label th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}"
+                   class="text-danger"/>
             <br>
-<!--            todo this has to be text area-->
-            <input type="text" class="form-control" th:field="*{fullDescription}" placeholder="Full Description">
+            <textarea id="exampleFormControlTextarea1" rows="3" class="form-control" th:field="*{fullDescription}"
+                      placeholder="Full Description"/>
+            <label th:if="${#fields.hasErrors('fullDescription')}" th:errors="*{fullDescription}" class="text-danger"/>
             <br>
             <input type="text" class="form-control" th:field="*{price}" placeholder="Price">
+            <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"/>
             <br>
             <select class="form-control" th:field="*{category}" placeholder="Select category">
-            <option th:each="category : ${categories}"
-                    th:value="${category.id}"
-                    th:text="${category.category}"></option>
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:text="${category.category}"></option>
             </select>
             <br>
             <div class="submit">
