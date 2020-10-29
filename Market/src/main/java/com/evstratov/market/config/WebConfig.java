@@ -16,5 +16,6 @@ public class WebConfig implements WebMvcConfigurer {
 //        bean.setPrefix("resources/templates/");
 //        bean.setSuffix(".html");
 //        return bean;
+//    todo make custom error  page
 //    }
 }

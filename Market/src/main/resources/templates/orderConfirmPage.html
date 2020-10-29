@@ -16,36 +16,38 @@
 <body>
 
 <div th:replace="~{navigation :: navi(Cart)}"/>
-<!--todo make ajax increase/decrease products quantity in cart-->
+
 <!--todo make address add/selection-->
 <div class="container">
-    <h1>Your cart</h1>
-    <h2>Список товаров:</h2>
-
-    <table class="table">
+    <h1>Your order</h1>
+    <h2>Confirm your order and select shipping address</h2>
+    <br>
+    <br>
+    <table class="table table-bordered">
         <thead class="thead-dark">
         <tr>
             <th>PRODUCT</th>
             <th>QUANTITY</th>
             <th>COST</th>
-            <th>Add</th>
-            <th>Remove</th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="cartItem : ${cartItems}">
-            <td th:text="${cartItem.getProduct().getTitle()}"/>
-            <td th:text="${cartItem.getQuantity()}"/>
-            <td th:text="${cartItem.getSubtotalPrice()}"/>
-            <td><a th:href="@{'/addToCart/'+${cartItem.product.getId()}}" class="btn btn-primary">+</a></td>
-            <td><a th:href="@{'/removeFromCart/'+${cartItem.product.getId()}}" class="btn btn-danger">-</a></td>
-        </tr>
-        </tbody>
+    <tr th:each="cartItem : ${cart.getOrderItems()}">
+        <td th:text="${cartItem.getProduct().getTitle()}"/>
+        <td th:text="${cartItem.getQuantity()}"/>
+        <td th:text="${cartItem.getSubtotalPrice()}"/>
+    </tr>
     </table>
+    <h5 th:text="'Order cost: '+${cart.getTotalCost()}"/>
     <br>
-    <h3 th:text="'Total cost: '+${totalCost}"/>
     <br>
-    <a th:href="@{/orderConfirmation}" class="btn btn-dark">Make an order</a>
+    <form th:action="@{/makeOrder}" th:object="${cart}" method="post">
+        <input type="text" class="form-control" th:field="*{address}"  placeholder="Recipient's address" aria-label="Recipient's address">
+        <input type="hidden" class="form-control" th:field="*{totalCost}">
+<!--        <input type="hidden" class="form-control" th:field="*{orderItems}">-->
+        <br>
+        <button type="submit" class="btn btn-dark">Make an order</button>
+    </form>
+
 </div>
 </body>
 </html>

@@ -31,6 +31,9 @@ public class Order {
     @Column(name = "create_at")
     private Date orderTime;
 
+    @Column(name = "address")
+    private String address;
+
     public Order() {
     }
 

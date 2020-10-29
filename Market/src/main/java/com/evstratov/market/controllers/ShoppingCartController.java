@@ -11,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
@@ -32,8 +29,7 @@ public class ShoppingCartController {
         return "cartPage";
     }
 
-
-        @GetMapping("addToCart/{id}")
+    @GetMapping("addToCart/{id}")
     public String addToCart(@PathVariable(value = "id") Long id, HttpSession session) {
         Optional<Product> product = productService.getProductById(id);
 
@@ -44,7 +40,6 @@ public class ShoppingCartController {
         return "redirect:/cart";
     }
 
-
     @GetMapping("removeFromCart/{id}")
     public String removeFromCart(@PathVariable("id") Long id, HttpSession session) {
         Optional<Product> product = productService.getProductById(id);
@@ -53,10 +48,17 @@ public class ShoppingCartController {
         return "redirect:/cart";
     }
 
-    @GetMapping("makeOrder")
-    public String makeOrder(@AuthenticationPrincipal User user, HttpSession session) {
+    @GetMapping("/orderConfirmation")
+    public String orderConfirmation(@AuthenticationPrincipal User user, Model model, HttpSession session) {
         if (user == null) return "login";
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        ShoppingCart cart = shoppingCartService.getCart(session);
+        model.addAttribute("cart", cart);
+        return "orderConfirmPage";
+    }
+
+    @PostMapping("makeOrder")
+    public String makeOrder(@AuthenticationPrincipal User user,
+                            @ModelAttribute("cart") ShoppingCart cart) {
         shoppingCartService.makeOrder(cart, user);
         return "successOrder";
     }
