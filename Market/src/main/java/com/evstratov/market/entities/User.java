@@ -7,8 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
+
 @Data
 @Entity
 @Table(name = "users")
@@ -29,6 +32,16 @@ public class User implements UserDetails {
     @Transient
     private String passwordConfirmation;
 
+    @NotBlank(message = "name cannot be empty")
+    @Size(min = 1, max = 50, message = "name has to be from 1 to 50 letters")
+    @Column(name = "first_name")
+    private String firstName;
+
+    @NotBlank(message = "surname cannot be empty")
+    @Size(min = 1, max = 50, message = "surname has to be from 1 to 50 letters")
+    @Column(name = "last_name")
+    private String lastName;
+
     @Column(name = "enabled")
     private boolean enabled;
 
@@ -36,6 +49,11 @@ public class User implements UserDetails {
     @Email(message = "enter correct email")
     @Column(name = "email")
     private String email;
+
+    @NotBlank(message = "phone cannot be empty")
+    @Pattern(regexp = "\\d{11}", message = "enter 11 digits of phone number")
+    @Column(name = "phone")
+    private String phone;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",

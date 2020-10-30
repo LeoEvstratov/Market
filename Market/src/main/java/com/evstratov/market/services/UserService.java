@@ -32,15 +32,19 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean saveUser(User user) {
-        if (userRepository.findUserByUsername(user.getUsername()) != null) { //todo write this better way
+        if (isUserInDB(user)) {
             return false;
         }
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            user.setEnabled(true);
-            Optional<Role> default_role = roleRepository.findByName("ROLE_CUSTOMER");
-            user.setAuthorities(Arrays.asList(default_role.get()));
-            userRepository.save(user);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setEnabled(true);
+        Optional<Role> default_role = roleRepository.findByName("ROLE_CUSTOMER");
+        user.setAuthorities(Arrays.asList(default_role.get()));
+        userRepository.save(user);
         return true;
+    }
+
+    private boolean isUserInDB(User user) {
+        return userRepository.findUserByUsername(user.getUsername()).isPresent();
     }
 
     public List<Role> getAllRoles() {

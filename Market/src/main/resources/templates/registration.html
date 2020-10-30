@@ -19,20 +19,26 @@
             <input type="text" class="form-control" th:field="*{username}" placeholder="User name"/>
             <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"/>
             <br>
-            <input type="text" class="form-control" th:field="*{password}" placeholder="password"/>
+            <input type="password" class="form-control" th:field="*{password}" placeholder="password"/>
             <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"/>
             <br>
-            <input type="text" class="form-control" th:field="*{passwordConfirmation}"
+            <input type="password" class="form-control" th:field="*{passwordConfirmation}"
                    placeholder="password confirmation">
             <label th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}" class="text-danger"/>
+            <br>
+            <input type="text" class="form-control" th:field="*{firstName}" placeholder="enter your name"/>
+            <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"/>
+            <br>
+            <input type="text" class="form-control" th:field="*{lastName}" placeholder="enter your last name"/>
+            <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"/>
+            <br>
+            <input type="text" class="form-control" th:field="*{phone}" placeholder="phone number"/>
+            <label th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger"/>
             <br>
             <input type="text" class="form-control" th:field="*{email}" placeholder="User's email">
             <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"/>
             <br>
-<!--            <div th:each="role : ${allRoles}">-->
-<!--                <input type="checkbox" th:value="${role.id}" th:field="*{authorities}" th:text="${role.name}"/>-->
-<!--                <br>-->
-<!--            </div>-->
+
             <br>
             <div class="submit">
                 <button name="addStudent" class="btn btn-primary" type="submit">Register</button>

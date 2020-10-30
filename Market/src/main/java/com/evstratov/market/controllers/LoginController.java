@@ -36,12 +36,12 @@ public class LoginController {
     public String registerNewUser(@ModelAttribute("user") @Valid User user,
                                   BindingResult bindingResult) {
         if (!user.getPassword().equals(user.getPasswordConfirmation())){
-            bindingResult.addError(new ObjectError("passwordConfirmation","passwords are not equal"));
-        }// todo password confirmation message doesnt appear
+            bindingResult.rejectValue("passwordConfirmation","user.passwordConfirmation","passwords are not equal" );
+        }
         if (bindingResult.hasErrors()){
             return "registration";
         }
-        userService.saveUser(user); // todo user is not saving in db
+        userService.saveUser(user); // todo bug cyrillic name/surname drops app
         return "redirect:/";
     }
 
