@@ -24,11 +24,11 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Optional<User> userFromDB = userRepository.findUserByUsername(s);
-        if (!userRepository.findUserByUsername(s).isEmpty()) {
+        User userFromDB = userRepository.findUserByUsername(s);
+        if (userRepository.findUserByUsername(s)==null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return userFromDB.get();
+        return userFromDB;
     }
 
     public boolean saveUser(User user) {
@@ -44,7 +44,7 @@ public class UserService implements UserDetailsService {
     }
 
     private boolean isUserInDB(User user) {
-        return userRepository.findUserByUsername(user.getUsername()).isPresent();
+        return userRepository.findUserByUsername(user.getUsername())!=null; //todo make this better way
     }
 
     public List<Role> getAllRoles() {
