@@ -1,7 +1,8 @@
-# Welcome to GitHub Desktop!
+# Welcome to Market!
 
-Lets just try to start using this staff.
+Market это мой учебный проект, который я использую чтобы понять и научиться эффективно использовать фреймворк spring и различные полезные и востребованные инструменты. 
 
-This is your README. READMEs are where you can communicate what your project is and how to use it.
+Проект представляет собой онлайн магазин и работает на spring boot, в качестве базы использует MySql с которой взаимодействует spring data, шаблонизатор - thymeleaf. 
+Структура проекта стандартная и классы распределены по соответствующим пакетам в соответствии с их функциональным назначением.
 
-Write your name on line 6, save it, and then head back to GitHub Desktop.
+В настоящий момент я стараюсь активно развивать и расширять проект, поэтому его структура и содержание могут меняться.
