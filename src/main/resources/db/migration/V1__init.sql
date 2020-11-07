@@ -13,7 +13,6 @@ title varchar2(255 char),
 primary key (id)
 );
 
-
 create table orders (
 id number(19,0) generated as identity,
 address varchar2(255 char),
@@ -37,7 +36,6 @@ id number(10,0) generated as identity,
 name varchar2(255 char),
 primary key (id)
 );
-
 
 create table products (
 id number(19,0) generated as identity,
@@ -69,7 +67,6 @@ phone varchar2(255 char),
 username varchar2(255 char),
 primary key (id)
 );
-
 
 create table users_roles (
 user_id number(19,0) not null,
