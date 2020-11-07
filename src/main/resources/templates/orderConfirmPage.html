@@ -40,10 +40,8 @@
     <h5 th:text="'Order cost: '+${cart.getTotalCost()}"/>
     <br>
     <br>
-    <form th:action="@{/makeOrder}" th:object="${cart}" method="post">
-        <input type="text" class="form-control" th:field="*{address}"  placeholder="Enter your address" aria-label="Recipient's address">
-        <input type="hidden" class="form-control" th:field="*{totalCost}">
-<!--        <input type="hidden" class="form-control" th:field="*{orderItems}">-->
+    <form th:action="@{/makeOrder}" method="post">
+        <input type="text" class="form-control" name="address"  placeholder="Enter your address" aria-label="Recipient's address">
         <br>
         <button type="submit" class="btn btn-dark">Make an order</button>
     </form>

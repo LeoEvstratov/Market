@@ -58,8 +58,10 @@ public class ShoppingCartController {
 
     @PostMapping("makeOrder")
     public String makeOrder(@AuthenticationPrincipal User user,
-                            @ModelAttribute("cart") ShoppingCart cart) {
-        shoppingCartService.makeOrder(cart, user);
+                            @RequestParam("address") String address,
+                            HttpSession session
+    ) {
+        shoppingCartService.makeOrder(shoppingCartService.getCart(session), user, address);
         return "successOrder";
     }
 
