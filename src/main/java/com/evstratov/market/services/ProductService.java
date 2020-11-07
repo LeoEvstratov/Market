@@ -5,6 +5,7 @@ import com.evstratov.market.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,12 +28,13 @@ public class ProductService {
     }
 
     public List<Product> searchByName(String searchQuery) {
-        return productRepository.searchByName(searchQuery);
+//        return productRepository.searchByName(searchQuery);// todo fix search
+        return Collections.emptyList();
     }
 
 
     public Optional<Product> getProductById(Long productId) {
-        return Optional.of(productRepository.getOne(productId));
+        return Optional.of(productRepository.getProductById(productId));
     }
 
     @Autowired

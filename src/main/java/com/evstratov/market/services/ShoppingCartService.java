@@ -31,10 +31,11 @@ public class ShoppingCartService {
     @Transactional
     public void makeOrder(ShoppingCart shoppingCart, User user) {
         Order order = new Order();
-        Optional<OrderStatus> status = statusRepository.findById(1);
+        Optional<OrderStatus> status = statusRepository.findByName("New");
         if (status.isPresent()) order.setStatus(status.get());
         order.setAddress(shoppingCart.getAddress());
         order.setCustomer(user);
+        order.setOrderTime(new Date());
         orderRepository.save(order);
 
         order.setOrderItems(shoppingCart.getOrderItems());
