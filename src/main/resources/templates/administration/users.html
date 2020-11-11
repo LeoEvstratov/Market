@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/js/main.js}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/resources/css/main.css}"/>
+</head>
+
+<body>
+<div th:replace="~{navigation :: navi('Admin Dashboard')}"/>
+<div class="container">
+    <h1>Admin Panel</h1>
+    <h3>Users control panel</h3>
+    <br>
+    <a th:href="@{'/administration/'}" class="btn btn-secondary">Back</a>
+    <div class="container">
+<!--        <a th:href="@{/addProduct}" class="btn btn-dark mb-2">Add a new product</a>-->
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Login</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>PHONE</th>
+                <th>EMAIL</th>
+                <th>ROLES</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.getId()}"/>
+                <td th:text="${user.getUsername()}"/>
+                <td th:text="${user.getFirstName()}"/>
+                <td th:text="${user.getLastName()}"/>
+                <td th:text="${user.getPhone()}"/>
+                <td th:text="${user.getEmail()}"/>
+                <td th:text="${user.getAuthorities()}"/>
+<!--                todo make role selection-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

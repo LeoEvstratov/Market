@@ -16,30 +16,29 @@
 <div th:replace="~{navigation :: navi('Admin Dashboard')}"/>
 <div class="container">
     <h1>Admin Panel</h1>
-    <!--    todo users roles edit-->
-    <!--todo orders with status change-->
-    <!--    todo warehouse with product total quantity-->
+    <h3>Orders control panel</h3>
+    <a th:href="@{'/administration/'}" class="btn btn-secondary">Back</a>
     <br>
     <div class="container">
-        <a th:href="@{/addProduct}" class="btn btn-dark mb-2">Add a new product</a>
         <br>
         <table class="table">
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>TITLE</th>
-                <th>DESC</th>
-                <th>COST</th>
-                <th>ACTION</th>
+                <th>CUSTOMER</th>
+                <th>ADDRESS</th>
+                <th>PHONE</th>
+                <th>STATUS</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="product : ${productsList}">
-                <td th:text="${product.getId()}"/>
-                <td th:text="${product.getTitle()}"/>
-                <td th:text="${product.getShortDescription()}"/>
-                <td th:text="${product.getPrice()}"/>
-                <td><a th:href="@{'/modify/'+${product.getId()}}" class="btn btn-secondary">Modify</a></td>
+            <tr th:each="order : ${orderList}">
+                <td th:text="${order.getId()}"/>
+                <td th:text="${order.getCustomer().getLastName()}+' '+${order.getCustomer().getFirstName()}"/>
+                <td th:text="${order.getAddress()}"/>
+                <td th:text="${order.getCustomer().getPhone()}"/>
+                <td th:text="${order.getStatus()}"/>
+<!--               todo make status selection-->
             </tr>
             </tbody>
         </table>

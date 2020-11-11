@@ -47,9 +47,13 @@ public class UserService implements UserDetailsService {
         return userRepository.findUserByUsername(user.getUsername())!=null; //todo make this better way
     }
 
+    public List<User> getAllUsers(){
+       return userRepository.findAll(); //todo make pageable and user search
+    }
+
     public List<Role> getAllRoles() {
         return roleRepository.findAll();
-    }
+    } //todo maybe remove it from here?
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {

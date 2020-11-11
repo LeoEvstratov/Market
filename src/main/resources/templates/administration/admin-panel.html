@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/js/main.js}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/resources/css/main.css}"/>
+</head>
+
+<body>
+<div th:replace="~{navigation :: navi('Admin Dashboard')}"/>
+<div class="container">
+    <h1>Admin Panel</h1>
+    <!--    todo warehouse with product total quantity-->
+    <a th:href="@{'/administration/users'}" class="btn btn-secondary">Users</a>
+    <a th:href="@{'/administration/orders'}" class="btn btn-secondary">Orders</a>
+    <a th:href="@{'/administration/products'}" class="btn btn-secondary">Products</a>
+
+</div>
+</body>
+</html>
