@@ -29,19 +29,20 @@ public class ShoppingCartService {
     }
 
     @Transactional
-    public void makeOrder(ShoppingCart shoppingCart, User user) {
+    public void makeOrder(ShoppingCart shoppingCart, User user, String address) {
         Order order = new Order();
-        Optional<OrderStatus> status = statusRepository.findById(1);
+        Optional<OrderStatus> status = statusRepository.findByName("New");
         if (status.isPresent()) order.setStatus(status.get());
-        order.setAddress(shoppingCart.getAddress());
+        order.setAddress(address);
         order.setCustomer(user);
+        order.setOrderTime(new Date());
         orderRepository.save(order);
 
         order.setOrderItems(shoppingCart.getOrderItems());
         for (OrderItem o : order.getOrderItems()) {
             o.setOrder(order);
+            orderItemRepository.save(o);
         }
-        orderRepository.save(order);
         shoppingCart.clear();
     }
 

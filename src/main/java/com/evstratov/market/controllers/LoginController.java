@@ -41,7 +41,7 @@ public class LoginController {
         if (bindingResult.hasErrors()){
             return "registration";
         }
-        userService.saveUser(user); // todo bug cyrillic name/surname drops app
+        userService.saveUser(user);
         return "redirect:/";
     }
 

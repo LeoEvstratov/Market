@@ -19,7 +19,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //todo add user validation
+
     @NotBlank(message = "username cannot be empty")
     @Column(name = "username")
     private String username;
