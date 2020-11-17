@@ -35,6 +35,11 @@ public class MainController {
         return "mainPage";
     }
 
+    @GetMapping("/ex")
+    public String throwEx(Model model) throws Exception {
+        throw new Exception("main exception!");// for exception logging tests
+    }
+
     @Secured({"ROLE_ADMIN"})
     @GetMapping("/admin")
     public String showAdminPanel(@RequestParam(name = "searchQuery", required = false) String searchQuery, Model model) {
