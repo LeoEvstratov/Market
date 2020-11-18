@@ -15,6 +15,9 @@
             <user>${DB_USER}</user>
             <password>${DB_PASS}</password>
         </connectionSource>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
     </appender>
     <root level="info">
         <appender-ref ref="CONSOLE"/>
