@@ -1,3 +1,4 @@
+-- The following lines are useful in cleaning any previously existing tables
 drop table categories cascade constraints;
 drop table orders cascade constraints;
 drop table orders_item cascade constraints;
