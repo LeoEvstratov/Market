@@ -32,6 +32,7 @@
                 <th>PHONE</th>
                 <th>EMAIL</th>
                 <th>ROLES</th>
+                <th>ACTION</th>
             </tr>
             </thead>
             <tbody>
@@ -43,7 +44,7 @@
                 <td th:text="${user.getPhone()}"/>
                 <td th:text="${user.getEmail()}"/>
                 <td th:text="${user.getAuthorities()}"/>
-<!--                todo make role selection-->
+                <td><a th:href="@{'users/modify/'+${user.getId()}}" class="btn btn-secondary">Modify</a></td>
             </tr>
             </tbody>
         </table>

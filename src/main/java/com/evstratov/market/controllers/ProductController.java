@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +30,7 @@ public class ProductController {
         List<Category> allCategories = categoryService.getAllCategories();
         model.addAttribute("categories", allCategories);
         model.addAttribute("product", product);
-        return "add-product";
+        return "administration/add-product";
     }
 
     @Secured("ROLE_ADMIN")
@@ -44,7 +42,7 @@ public class ProductController {
         if (product.isPresent()) {
             model.addAttribute("product", product.get());
         }
-        return "add-product";
+        return "administration/add-product";
     }
 
     @Secured("ROLE_ADMIN")
@@ -55,7 +53,7 @@ public class ProductController {
         if (bindingResult.hasErrors()) {
             List<Category> allCategories = categoryService.getAllCategories();
             model.addAttribute("categories", allCategories);
-            return "add-product";
+            return "administration/add-product";
         }
         productService.saveProduct(product);
         return "redirect:/";

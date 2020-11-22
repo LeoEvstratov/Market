@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -31,9 +33,13 @@ public class UserService implements UserDetailsService {
         return userFromDB;
     }
 
+    public Optional<User> getUserById(Long id){
+       return userRepository.findById(id);
+    }
+
     public boolean saveUser(User user) {
-        if (isUserInDB(user)) {
-            return false;
+        if (userRepository.existsUserByUsername(user.getUsername())) {
+            return false; //todo make exception
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
@@ -43,17 +49,17 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    private boolean isUserInDB(User user) {
-        return userRepository.findUserByUsername(user.getUsername())!=null; //todo make this better way
+    public void updateUser(User user){
+        userRepository.save(user);
     }
 
     public List<User> getAllUsers(){
        return userRepository.findAll(); //todo make pageable and user search
     }
 
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
-    } //todo maybe remove it from here?
+    public Set<Role> getAllRoles() {
+        return roleRepository.findAll().stream().collect(Collectors.toSet());
+    }
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {

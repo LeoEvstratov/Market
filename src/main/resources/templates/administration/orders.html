@@ -38,7 +38,7 @@
                 <td th:text="${order.getAddress()}"/>
                 <td th:text="${order.getCustomer().getPhone()}"/>
                 <td th:text="${order.getStatus()}"/>
-<!--               todo make status selection-->
+                <td><a th:href="@{'orders/details/'+${order.getId()}}" class="btn btn-secondary">Details</a></td>
             </tr>
             </tbody>
         </table>

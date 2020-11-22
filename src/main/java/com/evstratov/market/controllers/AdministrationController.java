@@ -2,6 +2,7 @@ package com.evstratov.market.controllers;
 
 import com.evstratov.market.entities.Order;
 import com.evstratov.market.entities.Product;
+import com.evstratov.market.entities.Role;
 import com.evstratov.market.entities.User;
 import com.evstratov.market.services.OrderService;
 import com.evstratov.market.services.ProductService;
@@ -11,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("administration")
@@ -31,6 +32,32 @@ public class AdministrationController {
     }
 
     @Secured({"ROLE_ADMIN"})
+    @GetMapping("/users")
+    public String showUsersControl(Model model) {
+        List<User> userList = userService.getAllUsers();
+        model.addAttribute("userList", userList);
+        return "administration/users";
+    }
+
+    @Secured({"ROLE_ADMIN"})
+    @GetMapping("users/modify/{userId}")
+    public String updateUserForm(Model model, @PathVariable("userId") Long userId) {
+        User user = userService.getUserById(userId).get();
+        Set<Role> allRoles = userService.getAllRoles();
+        model.addAttribute("user", user);
+        model.addAttribute("allRoles", allRoles);
+        return "administration/modify-user";
+    }
+
+    @Secured({"ROLE_ADMIN"})
+    @PostMapping("users/modify/updateUser")
+    public String saveUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
+        return "redirect:/administration/users";
+    }
+
+
+    @Secured({"ROLE_ADMIN"})
     @GetMapping("/products")
     public String showProductsControl(@RequestParam(name = "searchQuery", required = false) String searchQuery, Model model) {
         List<Product> productsList;
@@ -44,13 +71,6 @@ public class AdministrationController {
         return "administration/products";
     }
 
-    @Secured({"ROLE_ADMIN"})
-    @GetMapping("/users")
-    public String showUsersControl(Model model) {
-        List<User> userList = userService.getAllUsers();
-        model.addAttribute("userList", userList);
-        return "administration/users";
-    }
 
     @Secured({"ROLE_ADMIN"})
     @GetMapping("/orders")

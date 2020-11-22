@@ -15,7 +15,7 @@
     <h2>Registration form</h2>
     <br>
     <form th:action="@{/registration}" th:object="${user}" method="post">
-        <div class="form-group">
+        <div class="form-group w-50">
             <input type="text" class="form-control" th:field="*{username}" placeholder="User name"/>
             <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"/>
             <br>
