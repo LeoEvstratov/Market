@@ -1,9 +1,6 @@
 package com.evstratov.market.controllers;
 
-import com.evstratov.market.entities.Order;
-import com.evstratov.market.entities.Product;
-import com.evstratov.market.entities.Role;
-import com.evstratov.market.entities.User;
+import com.evstratov.market.entities.*;
 import com.evstratov.market.services.OrderService;
 import com.evstratov.market.services.ProductService;
 import com.evstratov.market.services.UserService;
@@ -25,7 +22,6 @@ public class AdministrationController {
     private UserService userService;
     private OrderService orderService;
 
-    @Secured({"ROLE_ADMIN"})
     @GetMapping("/")
     public String showAdminPanel() {
         return "administration/admin-panel";
@@ -56,8 +52,6 @@ public class AdministrationController {
         return "redirect:/administration/users";
     }
 
-
-    @Secured({"ROLE_ADMIN"})
     @GetMapping("/products")
     public String showProductsControl(@RequestParam(name = "searchQuery", required = false) String searchQuery, Model model) {
         List<Product> productsList;
@@ -71,14 +65,32 @@ public class AdministrationController {
         return "administration/products";
     }
 
-
-    @Secured({"ROLE_ADMIN"})
     @GetMapping("/orders")
     public String showOrdersControl(Model model) {
         List<Order> orderList = orderService.getAllOrders();
         model.addAttribute("orderList", orderList);
         return "administration/orders";
     }
+
+    @GetMapping("orders/details/{orderId}")
+    public String orderDetails(Model model, @PathVariable("orderId") Long orderId) {
+        Order order = orderService.getOrder(orderId);
+        Order orderDTO = new Order();
+        orderDTO.setId(orderId);
+        Set<OrderStatus> allOrderStatuses = orderService.getAllOrderStatuses();
+        model.addAttribute("orderItems", order.getOrderItems());
+        model.addAttribute("orderDTO", orderDTO);
+        model.addAttribute("allOrderStatuses", allOrderStatuses);
+        return "administration/order-details";
+    }
+
+    @PostMapping("orders/details/changeOrderStatus")
+    public String changeOrderStatus(Model model,
+                                    @ModelAttribute("orderDTO") Order orderDTO) {
+        orderService.updateOrderStatus(orderDTO.getId(), orderDTO.getStatus());
+        return "redirect:/administration/orders";
+    }
+
 
     @Autowired
     public void setProductService(ProductService productService) {

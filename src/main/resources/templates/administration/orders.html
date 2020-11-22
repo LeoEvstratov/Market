@@ -29,16 +29,19 @@
                 <th>ADDRESS</th>
                 <th>PHONE</th>
                 <th>STATUS</th>
+                <th>PROCEED</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="order : ${orderList}">
-                <td th:text="${order.getId()}"/>
-                <td th:text="${order.getCustomer().getLastName()}+' '+${order.getCustomer().getFirstName()}"/>
-                <td th:text="${order.getAddress()}"/>
-                <td th:text="${order.getCustomer().getPhone()}"/>
-                <td th:text="${order.getStatus()}"/>
-                <td><a th:href="@{'orders/details/'+${order.getId()}}" class="btn btn-secondary">Details</a></td>
+                <div th:if="${order.getCustomer() != null}">
+                    <td th:text="${order.getId()}"/>
+                    <td th:text="${order.getCustomer().getLastName()}+' '+${order.getCustomer().getFirstName()}"/>
+                    <td th:text="${order.getAddress()}"/>
+                    <td th:text="${order.getCustomer().getPhone()}"/>
+                    <td th:text="${order.getStatus()}"/>
+                    <td><a th:href="@{'orders/details/'+${order.getId()}}" class="btn btn-secondary">Details</a></td>
+                </div>
             </tr>
             </tbody>
         </table>
