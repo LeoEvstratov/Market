@@ -9,11 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Controller
 public class MainController {
-    // https://getbootstrap.com/docs/4.1/getting-started/introduction/
     private ProductService productService;
 
 //    @GetMapping("/")
@@ -33,6 +33,12 @@ public class MainController {
     public String showMainPage(Model model) {
         return "mainPage";
     }
+
+
+//    @GetMapping("/ex")
+//    public String throwEx(Model model) throws Exception {
+//        throw new Exception("EXCEPTION TO LOG IN DB");// to test exception logging
+//    }
 
     @Autowired
     public void setProductService(ProductService productService) {
