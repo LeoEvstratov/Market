@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/js/main.js}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/resources/css/main.css}"/>
+</head>
+
+<body>
+<div th:replace="~{navigation :: navi('Admin Dashboard')}"/>
+<div class="container">
+    <h1>Admin Panel</h1>
+    <h3>Orders control panel</h3>
+    <a th:href="@{'/administration/'}" class="btn btn-secondary">Back</a>
+    <br>
+    <div class="container">
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>CUSTOMER</th>
+                <th>ADDRESS</th>
+                <th>PHONE</th>
+                <th>STATUS</th>
+                <th>PROCEED</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orderList}">
+                <div th:if="${order.getCustomer() != null}">
+                    <td th:text="${order.getId()}"/>
+                    <td th:text="${order.getCustomer().getLastName()}+' '+${order.getCustomer().getFirstName()}"/>
+                    <td th:text="${order.getAddress()}"/>
+                    <td th:text="${order.getCustomer().getPhone()}"/>
+                    <td th:text="${order.getStatus()}"/>
+                    <td><a th:href="@{'orders/details/'+${order.getId()}}" class="btn btn-secondary">Details</a></td>
+                </div>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

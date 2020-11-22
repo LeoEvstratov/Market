@@ -14,4 +14,9 @@ public class OrderStatus {
     private int id;
     @Column(name = "name")
     private String name;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

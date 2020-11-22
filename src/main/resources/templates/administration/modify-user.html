@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modify User Details </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+</head>
+<html>
+<body>
+<div class="container">
+    <h2>Modify user roles</h2>
+    <br>
+    <form th:action="@{updateUser}" th:object="${user}" method="post">
+        <div class="form-group w-50">
+            <input type="text" class="form-control m-1" th:field="*{id}" readonly="readonly"/>
+            <input type="text" class="form-control m-1" th:field="*{username}" readonly="readonly"/>
+            <input type="hidden" class="form-control m-1" th:field="*{password}" readonly="readonly"/>
+            <input type="text" class="form-control m-1" th:field="*{firstName}" readonly="readonly"/>
+            <input type="text" class="form-control m-1" th:field="*{lastName}" readonly="readonly"/>
+            <input type="hidden" class="form-control m-1" th:field="*{enabled}" readonly="readonly"/>
+            <input type="text" class="form-control m-1" th:field="*{email}" readonly="readonly"/>
+            <input type="text" class="form-control m-1" th:field="*{phone}" readonly="readonly"/>
+            <br>
+            <div th:each="role : ${allRoles}">
+                <input type="checkbox" th:value="${role.id}" th:field="*{authorities}" th:text="${role.name}"/>
+                <br>
+            </div>
+            <br>
+            <div class="submit">
+                <button name="save" class="btn btn-primary" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
